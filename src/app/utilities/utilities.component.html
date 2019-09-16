@@ -1,0 +1,54 @@
+<div class="page-wrapper">
+    <div class="width">
+        <mat-accordion>
+            <mat-expansion-panel (opened)="reset()" (closed)="reset()">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Get Users
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        Select Org and APP
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <mat-form-field class="pad-right">
+                    <input type="text" placeholder="Select OKTA ORG" aria-label="OKTA Org" matInput [formControl]="orgControl" [matAutocomplete]="autoOrg">
+                    <mat-autocomplete autoActiveFirstOption #autoOrg="matAutocomplete" [displayWith]="displayOktaOrgs" (optionSelected)="orgSelected($event.option.value.name)">
+                        <mat-option *ngFor="let org of oktaOrgOptions | async" [value]="org">
+                            {{org.name}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+
+                <mat-form-field class="pad-right" >
+                    <input type="text" placeholder="OKTA App Name" aria-label="OKTA App" matInput [formControl]="appControl" [matAutocomplete]="autoApp">
+                    <mat-autocomplete autoActiveFirstOption #autoApp="matAutocomplete" [displayWith]="displayOktaApps" (optionSelected)="appSelected($event.option.value)">
+                        <mat-option *ngFor="let app of oktaAppOptions | async" [value]="app">
+                            {{app.label}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+                <button mat-raised-button [disabled]="disabled" (click)="openSnackBar(); getAppUsers()" color="primary">Get Users</button>
+            </mat-expansion-panel>
+            <mat-expansion-panel (opened)="panelOpenState = true; reset();"
+                                 (closed)="panelOpenState = false; reset();">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Get User Factors
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        Select Org
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <mat-form-field class="pad-right">
+                    <input type="text" placeholder="Select OKTA ORG" aria-label="OKTA Org" matInput [formControl]="orgControl" [matAutocomplete]="autoOrg">
+                    <mat-autocomplete autoActiveFirstOption #autoOrg="matAutocomplete" [displayWith]="displayOktaOrgs" (optionSelected)="orgSelected($event.option.value.name)">
+                        <mat-option *ngFor="let org of oktaOrgOptions | async" [value]="org">
+                            {{org.name}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+                <button mat-raised-button [disabled]="disabled" (click)="openSnackBar(); getUserFactors()" color="primary">Get User Factors</button>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+</div>

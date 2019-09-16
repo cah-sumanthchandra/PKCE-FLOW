@@ -1,0 +1,31 @@
+<div style="height:600px;">
+    <div style="height: 100px;">
+        <div *ngIf="totalUsers == noOfGroupUsers; else individualAssignment" class="information">
+            <span>There are a total of
+                <mark class="blue">{{totalUsers}}</mark> users assigned to
+                <mark class="blue">{{reportName}}</mark> in org <mark class="blue">{{org}}</mark><br/> and all of them are assigned through
+                <mark class="blue">{{noOfGroups}}</mark> different group(s).
+            </span>
+        </div>
+        <ng-template #individualAssignment>
+            <div class="information">
+                <span>
+                    There are a total of
+                    <mark class="blue">{{totalUsers}}</mark> users assigned to
+                    <mark class="blue">{{reportName}}</mark> in org <mark class="blue">{{org}}</mark>,<br/> out of which
+                    <mark class="blue">{{noOfGroupUsers}}</mark> users are assigned through
+                    <mark class="blue">{{noOfGroups}}</mark> different group(s) <br/> and
+                    <mark class="red">{{individualUsers}}</mark> user(s) are individually assigned.
+                </span>
+            </div>
+        </ng-template>
+    </div>
+    <div style="position: relative; height: 400px;">
+        <canvas baseChart
+                [data]="chartData"
+                [labels]="chartLabels"
+                [options]="chartOptions"
+                [chartType]="pieChartType"
+                (chartClick)="onChartClick($event)"></canvas>
+    </div>
+</div>

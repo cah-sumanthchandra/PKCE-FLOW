@@ -1,0 +1,55 @@
+<div class="page-wrapper">
+    <div class="user-search-container">
+        <div class="search-params-container">
+            <div id="form1">
+                <form class="okta-org">
+                    <mat-form-field class="okta-org-width">
+                        <input type="text" placeholder="Select OKTA ORG" aria-label="OKTA Org" matInput [formControl]="orgControl" [matAutocomplete]="autoOrg">
+                        <mat-autocomplete autoActiveFirstOption #autoOrg="matAutocomplete" [displayWith]="displayOktaOrgs" (optionSelected)="orgSelected($event.option.value.name)">
+                            <mat-option *ngFor="let org of oktaOrgOptions | async" [value]="org">
+                                {{org.name}}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+                </form>
+            </div>
+            <div id="form2">
+                <form class="okta-org">
+                    <mat-form-field class="okta-org-width">
+                        <input type="text" placeholder="Select OKTA User" aria-label="OKTA User" matInput [formControl]="typeAheadUserControl" [matAutocomplete]="autoUser">
+                        <mat-autocomplete autoActiveFirstOption #autoUser="matAutocomplete" [displayWith]="displayOktaUsers" (optionSelected)="userSelected($event.option.value)">
+                            <mat-option *ngFor="let user of oktaTypeAheadUserUserOptions | async" [value]="user">
+                                {{user.name}}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+                </form>
+            </div>
+        </div>
+        <div *ngIf="showUserTable" class="container-search">
+            <div class="search-params">
+                <span >Factors <b>{{selectedUser}}</b> has enrolled to in <b>{{selectedOrg}}</b> Org</span>
+            </div>
+            <div class="search-params pad">
+                <div class="search-container mat-elevation-z8" >
+                    <mat-table #factorsTable [dataSource]="factors">
+                        <ng-container matColumnDef="factorType">
+                            <mat-header-cell *matHeaderCellDef> Factor Type </mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{element.factorType}} </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="factorProvider">
+                            <mat-header-cell *matHeaderCellDef> Factor Provider </mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{element.provider}} </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="status">
+                            <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{element.status}} </mat-cell>
+                        </ng-container>
+                        <mat-header-row *matHeaderRowDef="factorTableColumns; sticky: true"></mat-header-row>
+                        <mat-row *matRowDef="let row; columns: factorTableColumns;"></mat-row>
+                    </mat-table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,61 @@
+<div class="page-wrapper">
+    <div class="user-search-container">
+        <div class="search-params-container">
+            <div id="form1">
+                <form class="okta-org">
+                    <mat-form-field class="okta-org-width">
+                        <input type="text" placeholder="Select OKTA ORG" aria-label="OKTA Org" matInput [formControl]="orgControl" [matAutocomplete]="autoOrg">
+                        <mat-autocomplete autoActiveFirstOption #autoOrg="matAutocomplete" [displayWith]="displayOktaOrgs" (optionSelected)="orgSelected($event.option.value.name)">
+                            <mat-option *ngFor="let org of oktaOrgOptions | async" [value]="org">
+                                {{org.name}}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+                </form>
+            </div>
+            <div id="form2">
+                <form class="okta-org">
+                    <mat-form-field class="okta-org-width">
+                        <input type="text" placeholder="Select OKTA User" aria-label="OKTA User" matInput [formControl]="typeAheadUserControl" [matAutocomplete]="autoUser">
+                        <mat-autocomplete autoActiveFirstOption #autoUser="matAutocomplete" [displayWith]="displayOktaUsers" (optionSelected)="userSelected($event.option.value)">
+                            <mat-option *ngFor="let user of oktaUsers" [value]="user">
+                                {{user.name}}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+                </form>
+            </div>
+        </div>
+        <div *ngIf="showUserTable" class="container-search">
+            <div class="search-params">
+                <span><b>{{selectedUser}}</b> has access to the following applications in {{selectedOrg}} Org
+                    as part of being a member of a group or was assigned as an individual user.</span>
+            </div>
+            <div class="search-params pad">
+                <mat-form-field class="filter">
+                    <input matInput (keyup)="trackUserFilterChanges($event.target.value)" placeholder="Filter">
+                </mat-form-field>
+                <div class="search-container mat-elevation-z8" >
+                    <table mat-table [dataSource]="appsAndGroups">
+                        <ng-container matColumnDef="appLabel">
+                            <th mat-header-cell *matHeaderCellDef> Apps </th>
+                            <td mat-cell *matCellDef="let element"> {{element.label}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="groupName">
+                            <th mat-header-cell *matHeaderCellDef> Groups </th>
+                            <td mat-cell *matCellDef="let element"> {{element._embedded.user._links.group?.name}} </td>
+                        </ng-container>
+                        <tr mat-header-row *matHeaderRowDef="appTableColumns; sticky: true"></tr>
+                        <tr mat-row *matRowDef="let row; columns: appTableColumns;"></tr>
+                    </table>
+                </div>
+            </div>
+            <div class="search-params pad-footer">
+                <div class="suggestion">*Empty Group Name suggests user is assigned to the application as an individual.</div>
+            </div>
+        </div>
+        <div *ngIf="showSpinner">
+            <div class="loading"></div>
+        </div>
+    </div>
+</div>

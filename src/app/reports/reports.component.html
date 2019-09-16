@@ -1,0 +1,28 @@
+<div class="page-wrapper">
+    <div class="reports-container">
+        <div *ngIf="(appUserReports.length > 0 || userMfaReports.length > 0) else noAvailableReportsTemplate" class="pad secondary-width">
+            <div *ngIf="appUserReports.length > 0">
+                <div class="reports-header reports-label">App User Reports:</div>
+                <div *ngFor="let appUserReport of appUserReports">
+                    <div class="link link-pad" (click)="clearAllFlags(); displayAppUserReport($event);">{{appUserReport}}</div>
+                </div>
+            </div>
+            <div *ngIf="userMfaReports.length > 0">
+                <div class="reports-header reports-label">User MFA Reports:</div>
+                <div *ngFor="let userMfaReport of userMfaReports">
+                    <div class="link link-pad" (click)="clearAllFlags(); displayUserMfaReport($event);">{{userMfaReport}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="primary-width">
+            <app-app-users *ngIf="showAppUserReport" [reportsData]="reportsData"
+                           [reportName]="reportName"
+                           [org]="org"></app-app-users>
+            <app-mfa-users *ngIf="showMfaReport" [reportsData]="reportsData"
+                           [org]="org"></app-mfa-users>
+        </div>
+    </div>
+    <ng-template #noAvailableReportsTemplate>
+        <div class="informational">Currently there are no available reports. Please navigate to Utilities to generate a report.</div>
+    </ng-template>
+</div>

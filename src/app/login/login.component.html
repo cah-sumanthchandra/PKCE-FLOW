@@ -1,0 +1,28 @@
+<div class="login-container">
+    <mat-card class="login-card center-align">
+        <h1 class="text-color">User Analytics</h1>
+        <div class="help-text">Sign In to access User Analytics</div>
+        <mat-card-content>
+            <form class="form" (keydown.enter) = "login()">
+                <table>
+                    <tr>
+                        <td>
+                            <mat-form-field class="input-form">
+                                <input matInput placeholder="Username" [(ngModel)]="username" name="username" required autocomplete="username" autofocus>
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <mat-form-field class="input-form">
+                                <input matInput placeholder="Password" [(ngModel)]="password" type="password" name="password" required autocomplete="new-password">
+                            </mat-form-field></td>
+                    </tr>
+                </table>
+            </form>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button (click)="login()" color="primary">Sign In</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

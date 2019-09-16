@@ -1,0 +1,22 @@
+.login-container {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-card {
+  border: 1px solid #979797;
+  min-width: 30%;
+  min-height: 295px;
+}
+
+.help-text {
+  font-size: 16px;
+  padding-bottom: 20px;
+}
+
+.input-form {
+  width: 70%;
+}

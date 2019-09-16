@@ -1,0 +1,4 @@
+---
+applications:
+- name: okta-user-analytics
+  memory: 768M

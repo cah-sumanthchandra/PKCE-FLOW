@@ -1,0 +1,44 @@
+<div *ngIf="isAuthenticated" class="page-wrapper header">
+    <div class="container">
+        <div id="cardinalLogo">
+            <a class="cardinal-logo" title="Cardinal Health" href="/">
+                <img alt="Cardinal Health Logo" class="cardinal-logo-img" src="assets/images/cah_logo.svg">
+            </a>
+        </div>
+        <div id="appTitle">
+            <h1 class="text-color">User Analytics</h1>
+        </div>
+        <div id="loggedInUser" class="logged-in-user">
+            <div>
+                <span>Welcome Chaitanya</span>
+                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                    <mat-icon matBadge="{{documentList}}" matBadgeColor="warn">
+                        menu
+                    </mat-icon>
+                </button>
+            </div>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item>
+                    <a routerLink="/reports" id="reports" routerLinkActive="router-link-active" class="menu-link">
+                        Reports
+                    </a>
+                </button>
+                <button mat-menu-item>
+                    <button mat-raised-button color="warn" (click)="logout()">Logout</button>
+                </button>
+            </mat-menu>
+        </div>
+    </div>
+    <div class="navigation-container">
+        <a routerLink="/users" id="userSearch" routerLinkActive="router-link-active" class="menu-link">
+            User Search
+        </a>
+        <a routerLink="/mfa" id="mfa" routerLinkActive="router-link-active" class="menu-link">
+            MFA
+        </a>
+        <a routerLink="/utilities" id="utilities" routerLinkActive="router-link-active" class="menu-link">
+            Utilities
+        </a>
+    </div>
+</div>
+<router-outlet></router-outlet>

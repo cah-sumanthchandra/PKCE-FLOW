@@ -1,0 +1,51 @@
+.reports-label {
+  color: rgba(0,0,0,.87);
+  line-height: 1.9;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.reports-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: baseline;
+}
+
+.secondary-width {
+  width: 22%;
+}
+
+.primary-width {
+  width: 78%;
+}
+
+.dialog-title {
+  text-align: center;
+  width: 90%;
+}
+
+.dialog-button {
+  justify-content: space-around;
+}
+
+.mat-blue {
+  background-color: #0f2560;
+  color: #ffffff;
+}
+
+.dialog-title-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.export-to-excel {
+  cursor: pointer;
+}
+
+.mat-paginator-sticky {
+  bottom: 0;
+  position: sticky;
+  z-index: 10;
+}
